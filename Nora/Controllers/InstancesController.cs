@@ -9,7 +9,7 @@ namespace nora.Controllers
         [HttpGet]
         public IHttpActionResult Root()
         {
-            return Ok("hello i am nora");
+            return Ok("hello i am nora 1jjjjjj");
         }
 
         [Route("~/id")]
