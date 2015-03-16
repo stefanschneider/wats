@@ -33,5 +33,16 @@ namespace nora.Controllers
         {
             return Ok(Environment.GetEnvironmentVariable(name));
         }
+
+        [Route("~/crash")]
+        public IHttpActionResult Crash()
+        {
+            for (var i = 0; i <= 40; i++)
+                Console.WriteLine(i);
+
+            Environment.Exit(123);
+
+            return Ok("Should never be reached");
+        }
     }
 }
