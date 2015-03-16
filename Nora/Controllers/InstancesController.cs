@@ -35,6 +35,7 @@ namespace nora.Controllers
         }
 
         [Route("~/crash")]
+        [HttpGet]
         public IHttpActionResult Crash()
         {
             for (var i = 0; i <= 40; i++)
