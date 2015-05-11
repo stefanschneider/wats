@@ -55,17 +55,18 @@ namespace nora.Controllers
         [HttpGet]
         public IHttpActionResult Write(string path)
         {
-            var file = File.OpenWrite(path);
-            var stream = new StreamWriter(file);
-            try
+            using (var stream = new StreamWriter(path))
             {
-                stream.Write(WindowsIdentity.GetCurrent().Name);
+                try
+                {
+                    stream.Write(WindowsIdentity.GetCurrent().Name);
+                }
+                catch (FileNotFoundException e)
+                {
+                    return InternalServerError(e);
+                }
             }
-            catch (FileNotFoundException e)
-            {
-                return InternalServerError(e);
-            }
-            return Ok();
+            return Ok(Path.GetFullPath(path));
         }
     }
 }
