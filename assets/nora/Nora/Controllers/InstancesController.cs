@@ -55,7 +55,7 @@ namespace nora.Controllers
         [HttpGet]
         public IHttpActionResult Write(string path)
         {
-            path = path.Replace('_', '\\');
+            path = Path.Combine(@"C:\containerizer", path);
             var fullPath = Path.GetFullPath(path);
             try
             {
