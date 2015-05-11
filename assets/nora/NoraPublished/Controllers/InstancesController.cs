@@ -56,16 +56,16 @@ namespace nora.Controllers
         public IHttpActionResult Write(string path)
         {
             var fullPath = Path.GetFullPath(path);
-            using (var stream = new StreamWriter(path))
+            try
             {
-                try
+                using (var stream = new StreamWriter(path))
                 {
                     stream.Write(WindowsIdentity.GetCurrent().Name);
                 }
-                catch (FileNotFoundException e)
-                {
-                    return InternalServerError(new Exception("Cannot write to: " + fullPath, e));
-                }
+            }
+            catch (FileNotFoundException e)
+            {
+                return InternalServerError(new Exception("Cannot write to: " + fullPath, e));
             }
             return Ok(fullPath);
         }
