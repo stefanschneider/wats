@@ -55,6 +55,7 @@ namespace nora.Controllers
         [HttpGet]
         public IHttpActionResult Write(string path)
         {
+            path = path.Replace('_', '\\');
             var fullPath = Path.GetFullPath(path);
             try
             {
