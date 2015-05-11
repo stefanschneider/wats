@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Security.Principal;
 using System.Web.Http;
 
 namespace nora.Controllers
@@ -47,6 +49,23 @@ namespace nora.Controllers
         public IHttpActionResult EnvName(string name)
         {
             return Ok(Environment.GetEnvironmentVariable(name));
+        }
+
+        [Route("~/write/{path}")]
+        [HttpGet]
+        public IHttpActionResult Write(string path)
+        {
+            var file = File.OpenWrite(path);
+            var stream = new StreamWriter(file);
+            try
+            {
+                stream.Write(WindowsIdentity.GetCurrent().Name);
+            }
+            catch (FileNotFoundException e)
+            {
+                return InternalServerError(e);
+            }
+            return Ok();
         }
     }
 }
