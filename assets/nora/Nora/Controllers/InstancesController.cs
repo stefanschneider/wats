@@ -55,6 +55,7 @@ namespace nora.Controllers
         [HttpGet]
         public IHttpActionResult Write(string path)
         {
+            var fullPath = Path.GetFullPath(path);
             using (var stream = new StreamWriter(path))
             {
                 try
@@ -63,10 +64,10 @@ namespace nora.Controllers
                 }
                 catch (FileNotFoundException e)
                 {
-                    return InternalServerError(e);
+                    return InternalServerError(new Exception("Cannot write to: " + fullPath, e));
                 }
             }
-            return Ok(Path.GetFullPath(path));
+            return Ok(fullPath);
         }
     }
 }
