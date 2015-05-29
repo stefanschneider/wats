@@ -37,7 +37,7 @@ var _ = Describe("Security Groups", func() {
 	// this test assumes the default running security groups block access to the DEAs
 	// the test takes advantage of the fact that the DEA ip address and internal container ip address
 	//  are discoverable via the cc api and nora's myip endpoint
-	It("allows traffic and then blocks traffic", func() {
+	FIt("allows traffic and then blocks traffic", func() {
 		By("pushing it")
 		Eventually(pushNora(appName), CF_PUSH_TIMEOUT).Should(Succeed())
 
@@ -55,11 +55,13 @@ var _ = Describe("Security Groups", func() {
 		// test app egress rules
 		curlResponse := func() int {
 			var noraCurlResponse NoraCurlResponse
-			resp := helpers.CurlApp(appName, fmt.Sprintf("/curl/%s/%s", secureHost, securePort))
+			resp := helpers.CurlApp(appName, fmt.Sprintf("/curl/%s/%s", "network.pivotal.io", "80"))
 			json.Unmarshal([]byte(resp), &noraCurlResponse)
+			fmt.Printf("curl response: %#v", noraCurlResponse)
 			return noraCurlResponse.ReturnCode
 		}
 		firstCurlError := curlResponse()
+		//Actually can talk to the outside world
 		Expect(firstCurlError).ShouldNot(Equal(0))
 
 		// apply security group
