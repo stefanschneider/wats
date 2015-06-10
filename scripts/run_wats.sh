@@ -6,9 +6,15 @@ set -e
 : ${SOCKET_ADDRESS_FOR_SECURITY_GROUP_TEST?"Must set address [ip address of Diego ETCD cluster] (e.g. 10.244.16.2:4001)"}
 : ${DOPPLER_URL?"Must set doppler websocket url (e.g. wss://doppler.hello.cf-app.com:4443)"}
 
-export PATH=$PWD/$CF_CLI_PATH:$PATH
-
 cd `dirname $0`
+
+if [[ "$(uname)" = "Darwin" ]]; then
+  ln -sf cf-darwin ../bin/cf
+else
+  ln -sf cf-linux ../bin/cf
+fi
+
+export PATH=$PWD/../bin:$PATH
 
 export GOPATH=$PWD/../../../../../
 export GOBIN=$GOPATH/bin
