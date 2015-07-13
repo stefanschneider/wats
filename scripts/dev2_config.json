@@ -1,0 +1,9 @@
+{
+  "api": "api.greenhouse-development2.cf-app.com",
+  "admin_user": "admin",
+  "admin_password": "cat9lives",
+  "apps_domain": "greenhouse-development2.cf-app.com",
+  "secure_address": "10.10.5.64:4001",
+  "doppler_url": "wss://doppler.greenhouse-development2.cf-app.com:4443",
+  "skip_ssl_validation": true
+}
