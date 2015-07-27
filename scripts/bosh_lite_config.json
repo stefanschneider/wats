@@ -4,5 +4,7 @@
   "admin_password": "admin",
   "apps_domain": "10.244.0.34.xip.io",
   "secure_address": "10.244.16.6:1169",
-  "skip_ssl_validation": true
+  "skip_ssl_validation": true,
+  "syslog_drain_port": 7589,
+  "syslog_ip_address": "0.0.0.0"
 }
