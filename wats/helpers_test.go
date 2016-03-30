@@ -64,6 +64,6 @@ func pushApp(appName, path string, instances int, memory string) func() error {
 		"--no-start",
 		"-i", strconv.Itoa(instances),
 		"-m", memory,
-		"-b", "binary_buildpack",
+		"-b", "https://github.com/stefanschneider/windows_app_lifecycle#buildpack-extraction",
 		"-s", "windows2012R2")
 }
