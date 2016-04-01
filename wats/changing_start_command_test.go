@@ -24,7 +24,7 @@ var _ = Describe("Changing an app's start command", func() {
 					"--no-start",
 					"--no-route",
 					"-b", "https://github.com/stefanschneider/windows_app_lifecycle#buildpack-extraction",
-					"-s", "windows2012R2",
+					"-s", "win2012r2",
 					"-c", "loop.bat Hi there!!!"), CF_PUSH_TIMEOUT).Should(Exit(0))
 			})
 

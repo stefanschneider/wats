@@ -9,7 +9,7 @@ if [ "x$DIR" == "x" -o "x$APPNAME" == "x" ]; then
     exit 1
 fi
 shift 2
-STACK=${STACK:-"windows2012R2"}
+STACK=${STACK:-"wind2012r2"}
 
 ## Remove existing
 cf d -f $APPNAME
